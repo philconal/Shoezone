@@ -1,54 +1,67 @@
-<div class="container mt-5 mb-5">
-  <div class="row">
-    <div class="col-sm-12 col-md-3">
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href=""><b>ShoeZone</b>Manager</a>
     </div>
-    <div class="col-sm-12 col-md-6">
-      <!-- Horizontal Form -->
-      <div class="card card-info">
-        <div class="card-header">
-          <h3 class="card-title">Login</h3>
-        </div>
-        <!-- form start -->
-        <form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="card-body">
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label" for="username" >Username</label>
-              <div class="col-sm-9">
-                <input autocomplete="on" class="form-control" id="username" placeholder="Email" type="text" formControlName="username">
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form action="" [formGroup]="loginForm" >
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" formControlName="username" value="admin" placeholder="Username">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label" for="password" >Password</label>
-              <div class="col-sm-9">
-                <input class="form-control" id="password" placeholder="Password" type="password" formControlName="password">
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="offset-sm-3 col-sm-9">
-                <div class="form-check">
-                  <input class="form-check-input" id="checkbox" type="checkbox">
-                  <label class="form-check-label" for="checkbox">Remember me</label>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <p>{{annouce}}</p>
             </div>
           </div>
-          <!-- /.card-body -->
-          <div class="card-footer">
-            <button class="btn btn-info"  type="submit" [disabled]="!loginForm.valid">Sign in
-            </button>
-            <button class="btn btn-default float-right" type="button" (click)="reset()">Cancel</button>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" formControlName="password" value="admin" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
           </div>
-          <!-- /.card-footer -->
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" (click)="onSubmit()" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+            <!-- /.col -->
+          </div>
         </form>
+
+        <div class="social-auth-links text-center mb-3">
+          <p>- OR -</p>
+          <a href="#" class="btn btn-block btn-primary">
+            <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+          </a>
+          <a href="#" class="btn btn-block btn-danger">
+            <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+          </a>
+        </div>
+        <!-- /.social-auth-links -->
+
+        <p class="mb-1">
+          <a href="">I forgot my password</a>
+        </p>
+        <p class="mb-0">
+          <a href="" class="text-center">Register a new membership</a>
+        </p>
       </div>
-      <!-- /.card -->
-    </div>
-    <div class="col-sm-12 col-md-3">
+      <!-- /.login-card-body -->
     </div>
   </div>
-</div>
-<router-outlet></router-outlet>
 
+</div>

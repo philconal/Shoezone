@@ -1,15 +1,107 @@
 <section class="content">
   <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">Branch</h3>
+    <div class="card-header bg-blue">
+      <div class="row ">
+        <div class="col-6"><h3>Branch</h3></div>
+        <div class="col-6 text-end ">
+          <button title="Add new brand" (click)="openModal(getEmptyBrand(),'Add')" class="btn btn-success text-white"
+                  type="button"><i class="fas fa-plus mr-1"></i>
+            Add
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div class="card-header fixed-top mt-3">
+
+      <div class="row my-row">
+        <div class="col-md-6">
+          <label class="my-label">Show</label>
+          <select class="my-custom-select" [(ngModel)]="itemsPerPage" (change)="resetPage()">
+            <option selected>5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+          <label class="my-label">entries</label>
+        </div>
+        <div class="col-md-6 ">
+          <div class="card-tools float-end">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" [(ngModel)]="search" (ngModelChange)="searchBrand()"
+                     placeholder="Brand's name">
+              <div class="input-group-append">
+                <button class="btn btn-outline-info" type="button"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
     </div>
     <!-- /.card-header -->
-    <div class="card-body">
-      <div id="jsGrid1"></div>
+    <div class="card-body table-responsive p-0" style="height: 400px;">
+
+
+      <table class="table table-head-fixed table-hover table-light">
+        <thead>
+        <tr>
+          <th>No.</th>
+          <th>Logo</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let brand of brands |paginate:  {
+              itemsPerPage: itemsPerPage,
+              currentPage: page,
+              totalItems: totalItems
+            }; let i=index">
+          <td>{{start + i}}</td>
+          <td><img src="{{brand.imgUrl}}" alt="logo" width="50px" height="50px"></td>
+          <td> {{brand.name}}</td>
+          <td>{{brand.phone}}</td>
+          <td>{{brand.email}}</td>
+          <td>{{brand.status}}</td>
+          <td class="text-center">
+            <button class="btn btn-outline-info mx-1 my-1" (click)="openModal(brand,'Edit')">
+              <i class="fas fa-edit text-blue" title="Edit"></i>
+            </button>
+            <button class="btn btn-outline-danger mx-1 my-1" (click)="remove(brand)">
+              <i title="Remove" class="fas fa-trash text-danger"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
     <!-- /.card-body -->
+    <div class="card-footer ">
+      <div class="row">
+        <div class="col-sm-12 col-md-6  pt-3" aria-live="polite"
+             *ngIf="(start - 1 + this.itemsPerPage)<this.totalItems">
+          Showing {{start}} to  {{start - 1 + this.itemsPerPage}}
+          of {{totalItems}} entries
+        </div>
+        <div class="col-sm-12 col-md-6 pt-3" aria-live="polite" *ngIf="(start - 1 + this.itemsPerPage)>this.totalItems">
+          Showing {{start}} to  {{this.totalItems}}
+          of {{totalItems}} entries
+        </div>
+        <div class="col-sm-12 col-md-6  pt-3">
+          <pagination-controls class="text-end" (pageChange)="gty((page = $event))"></pagination-controls>
+        </div>
+      </div>
+
+    </div>
   </div>
   <!-- /.card -->
 </section>
 <!-- /.content -->
+
 
